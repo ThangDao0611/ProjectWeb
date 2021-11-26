@@ -6,16 +6,17 @@ const auth = async (req,res,next)=>{
     if(!token){
         return res.status(403).send({error: 'No token provided'});
     }
-    const data = jwt.verify(token,process.env.JWT_KEY);
-    if (!data) {
-        if(error.name === 'TokenExpiredError'){
-            return res.status(403).send({message: 'Token Expired'});
-        }
-        else{
-            return res.status(403).send({message: 'Token Error'});
-        }
-    }
+    
+    // if (!data) {
+    //     if(error.name === 'TokenExpiredError'){
+    //         return res.status(403).send({message: 'Token Expired'});
+    //     }
+    //     else{
+    //         return res.status(403).send({message: 'Token Error'});
+    //     }
+    // }
     try {
+        const data = jwt.verify(token,process.env.JWT_KEY);
         const user = await User.findOne({_id: data._id, 'tokens.token': token }).exec();
         if(!user){
             throw new Error();
