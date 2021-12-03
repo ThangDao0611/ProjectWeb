@@ -25,8 +25,8 @@ routerCon.post("/api/add-contribution",auth,async (req, res)=>{
 })
 
 routerCon.get("/api/get-contribution",async (req, res)=>{
-    let word_id = req.body.word_id;
-    let type = req.body.type;
+    let word_id = req.query.word_id;
+    let type = req.query.type;
     try {
         const query = Contribution.find({word_id: word_id,type: type,flag:0});
         query.exec(async(err,list)=>{
@@ -41,8 +41,8 @@ routerCon.get("/api/get-contribution",async (req, res)=>{
 })
 
 routerCon.get("/api/get-my-contribution",auth,async (req, res)=>{
-    let word_id = req.body.word_id;
-    let type = req.body.type;
+    let word_id = req.query.word_id;
+    let type = req.query.type;
     let user_id = req.user._id;
     try {
         const query = Contribution.find({word_id: word_id,type: type,user_id:user_id,flag:0});

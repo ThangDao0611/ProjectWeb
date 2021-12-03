@@ -7,6 +7,7 @@ const routerUser = express.Router();
 routerUser.post('/users',async (req,res)=>{
     //Create a new User
     try{
+        // console.log(req.body);
         const user = new User(req.body);
         await user.save();
         const token = await user.generateAuthToken();
@@ -42,6 +43,7 @@ routerUser.post('/users/refresh-token', async (req, res)=>{
 routerUser.post('/users/login',async (req, res) => {
     // Login a registered user
     try{
+        console.log(req.body);
         const {email,password} = req.body;
         const user = await User.findByCredentials(email, password);
         if(!user){

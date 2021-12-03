@@ -14,16 +14,17 @@ const router = express.Router();
 
 router.get("/api/search-word", async (req, res) => {
     //search word
-    let lang = req.body.lang;
-    //console.log(req);
+    // console.log(req);
+    let lang = req.query.lang;
+    
     if (lang == "en") {
         try {
             //if(req.body.word)
-            const query = Word.findOne({ word: req.body.word });
+            const query = Word.findOne({ word: req.query.word });
             query.exec(async (err, word) => {
                 if (err) return console.error(err);
                 if (word == null) {
-                    const [translation] = await translate.translate(req.body.word, 'vi');
+                    const [translation] = await translate.translate(req.query.word, 'vi');
                     console.log(translation);
                     return res.status(200).send({ word: translation, auto: true });
                 }
@@ -35,15 +36,15 @@ router.get("/api/search-word", async (req, res) => {
         }
     } else {
         try {
-            const query = WordVn.findOne({ word: req.body.word });
+            const query = WordVn.findOne({ word: req.query.word });
             query.exec(async (err, word) => {
                 if (err) return console.error(err);
                 if (word == null) {
 
-                    const [translation] = await translate.translate(req.body.word, 'en');
+                    const [translation] = await translate.translate(req.query.word, 'en');
                     console.log(translation);
                     return res.status(200).send({ word: translation, auto: true });
-                    // const text = await translate(req.body.word, { from: "vi", to: "en" });
+                    // const text = await translate(req.query.word, { from: "vi", to: "en" });
                     // console.log(text);
                     // return res.status(200).send({ word: text, auto: true });
                 }
@@ -58,11 +59,11 @@ router.get("/api/search-word", async (req, res) => {
 
 router.get("/api/recommend-search", async (req, res) => {
     //recommend english word
-    let lang = req.body.lang;
+    let lang = req.query.lang;
     if (lang == "en") {
         try {
-            let re = new RegExp("\\b(" + "^" + req.body.word + ")\\b", "g");
-            const query = Word.find({ word: { $regex: re } }).limit(10);
+            let re = new RegExp("\\b(" + "^" + req.query.word + ")\\b", "g");
+            const query = Word.find({ word: { $regex: re } }).select(["means","word","spell"]).limit(10);
             query.exec((err, word) => {
                 if (err) return console.error(err);
                 return res.status(200).send({ word: word });
@@ -73,7 +74,7 @@ router.get("/api/recommend-search", async (req, res) => {
         }
     } else {
         try {
-            let re = new RegExp("\\b(" + "^" + req.body.word + ")\\b", "g");
+            let re = new RegExp("\\b(" + "^" + req.query.word + ")\\b", "g");
             const query = WordVn.find({ word: { $regex: re } }).limit(10);
             query.exec((err, word) => {
                 if (err) return console.error(err);
@@ -87,15 +88,15 @@ router.get("/api/recommend-search", async (req, res) => {
 });
 
 router.get("/api/translate-paragraph", async (req, res) => {
-    const type = req.body.type;
+    const type = req.query.type;
     if (type === "vi") {
-        //const text = await translate(req.body.param, { from: "en", to: "vi" });
-        const [translation] = await translate.translate(req.body.param, 'vi');
+        //const text = await translate(req.query.param, { from: "en", to: "vi" });
+        const [translation] = await translate.translate(req.query.param, 'vi');
         console.log(translation);
         return res.status(200).send({ param: translation });
     } else {
         //console.log("en")
-        const [translation] = await translate.translate(req.body.param, 'en');
+        const [translation] = await translate.translate(req.query.param, 'en');
         console.log(translation);
         return res.status(200).send({ param: translation });
     }
@@ -107,8 +108,15 @@ router.get("/api/grammar-check", async (req, res) => {
         language: "en-US", // (Optional) defaults to en-US
         base_uri: "api.grammarbot.io", // (Optional) defaults to api.grammarbot.io
     });
-    const result = await bot.checkAsync(req.body.text);
+    const result = await bot.checkAsync(req.query.text);
     return res.status(200).send({ text: result });
 });
+
+router.get("/api/get-list-card",async (req, res)=>{
+    let cards = req.query.cards;
+    const records = await Word.find().select(["word","wType","means"]).where('word').in(cards).exec();
+    return res.status(200).send({list: records});
+
+})
 
 export default router;
