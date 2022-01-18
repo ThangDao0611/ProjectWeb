@@ -1,0 +1,133 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.output {
+  font-size: 18px;
+}
+
+.mga {
+  margin: auto;
+}
+
+.mg-1 {
+  margin: 1px;
+}
+
+.mg-5 {
+  margin: 5px;
+}
+
+.mg-20 {
+  margin: 20px;
+}
+
+.mgl-20 {
+  margin-left: 20px;
+}
+
+.mgl-10 {
+  margin-left: 10px;
+}
+
+.cl-blue {
+  color: #3367d6;
+}
+
+.site-layout-background {
+  min-height: 1000px;
+  padding: 24px;
+  margin-top: 54px;
+}
+
+.container {
+  margin: 25px 100px;
+}
+
+.title {
+  margin: auto;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.btn-default {
+  border-radius: 30px !important;
+}
+
+.easing-variables {
+  --ease-in-quad: cubic-bezier(0.55, 0.085, 0.68, 0.53);
+  --ease-in-cubic: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  --ease-in-quart: cubic-bezier(0.895, 0.03, 0.685, 0.22);
+  --ease-in-quint: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+  --ease-in-expo: cubic-bezier(0.95, 0.05, 0.795, 0.035);
+  --ease-in-circ: cubic-bezier(0.6, 0.04, 0.98, 0.335);
+
+  --ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+  --ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-out-expo: cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-out-circ: cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  --ease-in-out-quad: cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1);
+  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-in-out-quint: cubic-bezier(0.86, 0, 0.07, 1);
+  --ease-in-out-expo: cubic-bezier(1, 0, 0, 1);
+  --ease-in-out-circ: cubic-bezier(0.785, 0.135, 0.15, 0.86);
+  transition: transform 1s var(--ease-out-quart);
+}
+
+.easing-variables:hover {
+  transform: rotate(45deg);
+}
+
+.title-comm {
+  color: #fff;
+  font-size: 18px;
+  position: relative;
+  margin-bottom: 30px;
+  font-weight: 700;
+  background-color: #fff;
+  text-align: center;
+}
+/* h3.title-comm:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  margin-top: 0;
+  border-top: 2px solid #d0d2d3;
+  z-index: 1;
+  display: block;
+} */
+.title-comm .title-holder {
+  min-width: 350px;
+  height: 45px;
+  background-color: #56bbe7;
+  height: auto;
+  border-radius: 15px;
+  line-height: 45px;
+  padding: 0px 20px;
+  position: relative;
+  text-align: center;
+  display: inline-block;
+  min-width: 280px;
+}
+
+@media screen and (max-width: 1150px) {
+  .site-layout-background {
+    min-height: 700px;
+  }
+
+  .container {
+    margin: 20px 20px;
+  }
+
+  .title {
+    font-size: 14px;
+  }
+}

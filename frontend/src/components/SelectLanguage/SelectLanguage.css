@@ -1,0 +1,45 @@
+textarea.ant-input {
+  min-height: 250px !important;
+  vertical-align: none;
+}
+
+.container-language {
+  text-align: center;
+  margin: auto;
+}
+
+.anticon.ant-input-clear-icon {
+  font-size: 20px !important;
+}
+
+.input {
+  background-color: #3367d6 !important;
+  color: white !important;
+  border-radius: 30px !important;
+  font-size: 20px !important;
+}
+
+.container-translate {
+  position: relative;
+  width: 100%;
+}
+
+.output-translate {
+  max-width: 100%;
+  min-height: 250px !important;
+  border: 1px solid #d9d9d9;
+}
+
+.btn-submit {
+  width: 20%;
+  background-color: #3367d6 !important;
+  color: white !important;
+  font-size: 15px !important;
+  text-align: center !important;
+  margin-top: 7px !important;
+}
+
+.btn-submit:hover {
+  width: 22%;
+  height: 40px !important;
+}
